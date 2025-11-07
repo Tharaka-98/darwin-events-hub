@@ -7,9 +7,10 @@ import { generateEventMetadata, generateStructuredData } from "@/lib/seo";
 export async function generateMetadata({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }): Promise<Metadata> {
-  const event = getEventById(params.id);
+  const { id } = await params;
+  const event = getEventById(id);
 
   if (!event) {
     return {
@@ -20,12 +21,13 @@ export async function generateMetadata({
   return generateEventMetadata(event);
 }
 
-export default function EventDetailPage({
+export default async function EventDetailPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
-  const event = getEventById(params.id);
+  const { id } = await params;
+  const event = getEventById(id);
 
   if (!event) {
     notFound();
