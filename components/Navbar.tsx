@@ -21,9 +21,8 @@ export default function Navbar() {
 
   // Sync search query with URL params when on explore page
   useEffect(() => {
-    const searchParam = pathname === "/explore"
-      ? searchParams.get("search") ?? ""
-      : "";
+    const searchParam =
+      pathname === "/explore" ? searchParams.get("search") ?? "" : "";
 
     startTransition(() => {
       setSearchQuery((prev) => (prev === searchParam ? prev : searchParam));
@@ -40,7 +39,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
+    <nav className="sticky top-0 z-50 w-full border-b backdrop-blur bg-background/95 supports-backdrop-filter:bg-background/60">
       <div className="container px-4 mx-auto">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
