@@ -137,7 +137,7 @@ export default function ExploreClient() {
                       </label>
                       <Input
                         placeholder="Search events..."
-                        value={filters.searchQuery}
+                        value={filters.searchQuery ?? ""}
                         onChange={(e) =>
                           setFilters({
                             ...filters,
@@ -150,8 +150,9 @@ export default function ExploreClient() {
                             const params = new URLSearchParams(
                               window.location.search
                             );
-                            if (filters.searchQuery.trim()) {
-                              params.set("search", filters.searchQuery.trim());
+                            const trimmedQuery = filters.searchQuery?.trim();
+                            if (trimmedQuery) {
+                              params.set("search", trimmedQuery);
                             } else {
                               params.delete("search");
                             }
@@ -226,7 +227,7 @@ export default function ExploreClient() {
                     {/* Clear Filters */}
                     {(filters.categories.length > 0 ||
                       filters.priceRange !== "all" ||
-                      filters.searchQuery) && (
+                      (filters.searchQuery ?? "")) && (
                       <Button
                         variant="outline"
                         className="w-full"
