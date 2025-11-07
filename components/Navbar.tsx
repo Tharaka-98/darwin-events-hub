@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
-import { Search, User, Heart, MapPin, Menu } from "lucide-react";
+import { Search, User, Heart, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -11,7 +11,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useState, FormEvent, useEffect } from "react";
+import { useState, FormEvent, useEffect, startTransition } from "react";
 
 export default function Navbar() {
   const router = useRouter();
@@ -25,7 +25,9 @@ export default function Navbar() {
       ? searchParams.get("search") ?? ""
       : "";
 
-    setSearchQuery((prev) => (prev === searchParam ? prev : searchParam));
+    startTransition(() => {
+      setSearchQuery((prev) => (prev === searchParam ? prev : searchParam));
+    });
   }, [pathname, searchParams]);
 
   const handleSearch = (e: FormEvent) => {
@@ -38,7 +40,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
       <div className="container px-4 mx-auto">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
