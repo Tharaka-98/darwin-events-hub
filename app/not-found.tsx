@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Suspense } from "react";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -6,7 +7,9 @@ import Footer from "@/components/Footer";
 export default function NotFound() {
   return (
     <div className="flex min-h-screen flex-col">
-      <Navbar />
+      <Suspense fallback={null}>
+        <Navbar />
+      </Suspense>
       <main className="flex flex-1 items-center justify-center">
         <div className="text-center">
           <h1 className="mb-4 font-heading text-6xl font-bold">404</h1>
